@@ -27,10 +27,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Rodar testes
+      - name: Instalar dependências
         run: |
-          docker build -t projeto-devops:latest .
-          docker run projeto-devops:latest pytest 
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
+
+      - name: Rodar testes
+        run: pytest
 
   deploy:
     runs-on: ubuntu-latest
